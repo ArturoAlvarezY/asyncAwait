@@ -10,10 +10,24 @@ async function fetchPackage() {
 
   async function displayAllTitles() {
     const all = await fetchPackage();
-    all.forEach(all => {
-      console.log(all.title);
+    const tableBody = document.getElementById('todosTable').querySelector('tbody');
+
+    all.forEach(todo => {
+      const row = document.createElement('tr');
+
+      const titleCell = document.createElement('td');
+      titleCell.textContent = todo.title;
+      row.appendChild(titleCell);
+
+      const priorityCell = document.createElement('td');
+      priorityCell.textContent = todo.priority;
+      row.appendChild(priorityCell);
+
+      const isDoneCell = document.createElement('td');
+      isDoneCell.textContent = todo.isDone ? 'Yes' : 'No';
+      row.appendChild(isDoneCell);
+
+      tableBody.appendChild(row);
     });
   }
-
-  // Llamar a la función para mostrar los títulos
   displayAllTitles();
